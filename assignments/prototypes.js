@@ -154,7 +154,7 @@ Villain.prototype = Object.create(Humanoid.prototype);
 Villain.prototype.gunShot = function(obj) {
   obj.healthPoints -= 5;
   if (obj.healthPoints <= 0) obj.destroy();
-  return `${obj.name} took a hit and has ${obj.healthPoints} left.`
+  return `${obj.name} took a hit and has ${obj.healthPoints} health points left.`
 }
 
 function Hero(heroAttributes) {
