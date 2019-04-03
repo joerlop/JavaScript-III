@@ -141,5 +141,70 @@ Humanoid.prototype.greet = function() {
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+  // * Give the Hero and Villains different methods that could be used to remove health points from objects which 
+  // * could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+function Villain(villainAttributes) {
+  Humanoid.call(this, villainAttributes);
+}
+
+Villain.prototype = Object.create(Humanoid.prototype);
+
+Villain.prototype.gunShot = function(obj) {
+  obj.healthPoints -= 5;
+  if (obj.healthPoints <= 0) obj.destroy();
+  return `${obj.name} took a hit and has ${obj.healthPoints} left.`
+}
+
+function Hero(heroAttributes) {
+  Humanoid.call(this, heroAttributes);
+}
+
+Hero.prototype = Object.create(Humanoid.prototype);
+
+Hero.prototype.magicSpell = function(obj) {
+  obj.healthPoints -= 4;
+  if (obj.healthPoints <= 0) return `${obj.name} got REKT and has no health points left. ${obj.destroy()}`;
+  return `${obj.name} took a hit and has ${obj.healthPoints} health points left.`
+}
+
+const magicWanderer = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 2,
+    width: 2,
+    height: 4,
+  },
+  healthPoints: 15,
+  name: 'Aurelius',
+  team: 'Forest Kingdom',
+  weapons: [
+    'Magic',
+  ],
+  language: 'Minian',
+});
+
+const evilGunMan = new Villain({
+  createdAt: new Date(),
+  dimensions: {
+    length: 2,
+    width: 5,
+    height: 4,
+  },
+  healthPoints: 20,
+  name: 'Tirofijo',
+  team: 'Jungla',
+  weapons: [
+    'Gun',
+  ],
+  language: 'Mexican Spanish',
+});
+
+console.log(evilGunMan.gunShot(magicWanderer));
+console.log(magicWanderer.magicSpell(evilGunMan));
+console.log(magicWanderer.magicSpell(evilGunMan));
+console.log(magicWanderer.magicSpell(evilGunMan));
+console.log(evilGunMan.gunShot(magicWanderer));
+console.log(magicWanderer.magicSpell(evilGunMan));
+console.log(magicWanderer.magicSpell(evilGunMan));
