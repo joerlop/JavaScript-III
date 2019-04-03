@@ -18,7 +18,7 @@ function windowBinding(name) {
     return name;
 }
 
-console.log(windowBinding("Jonathan"));
+windowBinding("Jonathan");
 
 // Principle 2
 
